@@ -1,0 +1,25 @@
+receivers:
+  zipkin:
+
+processors:
+  processor1/a:
+    phrase: "123"
+  processor1/b:
+    phrase: "abc"
+  processor2:
+
+exporters:
+  file:
+    path: ./exported-trace.json
+
+service:
+  pipelines:
+    traces:
+      receivers:
+        - zipkin
+      processors:
+        - processor1/a
+        - processor1/b
+        - processor2
+      exporters:
+        - file
